@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/order/orderList}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Wroc</a></li>
+				<li><a th:href="@{/order/orderUpdate?id=}+${order.id}">Edycja produktu</a></li>
+			</ol>
+			
+		</div>
+		
+		<div class="row">
+			
+			<div class="col-xs-9">
+				<h3><strong>Numer zamowienia :</strong> <strong  th:text="${order.id} "> </strong> </h3>
+				
+				<div class="row">
+					<div class="col-xs-6">
+					
+					
+					
+				
+					
+					
+					
+					
+					<p><strong>Imie i Nazwisko: </strong><span th:text="${order.billingAddress.billingAddressName}"></span></p>
+					
+						<p><strong>Data: </strong><span th:text="${order.orderDate}"></span></p>
+					
+						<p><strong>Data wyslania: </strong><span th:text="${order.shippingDate}"></span></p>
+						
+						<p><strong> Miasto do wysylki :</strong><span th:text="${order.billingAddress.billingAddressCity}"></span></p>
+						
+						<p><strong> Ulica wysylki :</strong><span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span></p>
+						
+						
+						<p><strong> Wojewodztwo : </strong><span th:text="${order.billingAddress.billingAddressState}"></span></p>
+						<p><strong> Kod pocztowy : </strong><span th:text="${order.billingAddress.billingAddressZipcode}"></span></p>
+						
+					<p><strong> </strong><span th:text="${order.orderStatus}"></span></p>
+						
+						<p><strong> Kod pocztowy : </strong><span th:text="${order.payment.holderName}"></span></p>
+			
+			
+<div class="col-xs-3">
+				
+					
+	<h3><strong>Podsumowanie zamowienia</strong></h3>
+<table>
+<thead>
+	<tr>
+		<td><strong>Nazwy produktow</strong></td>
+		<td class="text-center"><strong>Cena za sztuke/kg</strong></td>
+		<td class="text-center"><strong>Ilosc zamowionych</strong></td>
+		<td class="text-right"><strong>Calosc</strong></td>
+	</tr>
+</thead>
+<tbody>
+	<tr th:each="cartItem : ${cartItemList}">
+		<td><span data-th-text="${cartItem.book.title}"></span></td>
+		<td class="text-center" data-th-text="${cartItem.book.ourPrice}"></td>
+		<td class="text-center" data-th-text="${cartItem.qty}"></td>
+		<td class="text-right" data-th-text="${cartItem.subtotal}"></td>
+	</tr>
+	<tr>
+		<td class="highrow"></td>
+		<td class="highrow"></td>
+		<td class="highrow text-center"><strong>Podsumowanie</strong></td>
+		<td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+	</tr>
+	<tr>
+		<td class="emptyrow"></td>
+		<td class="emptyrow"></td>
+		<td class="emptyrow text-center"><strong>Podatek</strong></td>
+		<td class="emptyrow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.25,0,2)}"></td>
+	</tr>
+	<tr>
+		<td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+		<td class="emptyrow"></td>
+		<td class="emptyrow text-center"><strong>Podsumowanie pelne</strong></td>
+		<td th:with="total=${order.orderTotal+order.orderTotal*0.25}"
+            data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
+            class="emptyrow text-right">
+        </td>
+	</tr>
+</tbody>
+</table>
+	</div>						
+						
+					
+						
+					
+					</div>
+					<div class="col-xs-6">
+						
+						
+					</div>
+				</div>
+				
+					
+				
+			</div>
+			
+			
+		</div>
+	</div>
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

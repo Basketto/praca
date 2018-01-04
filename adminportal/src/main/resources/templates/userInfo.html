@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/user/userList}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Wroc</a></li>
+				
+			</ol>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-3">
+				
+			</div>
+			<div class="col-xs-9">
+				<h3 th:text="${user.username}"></h3>
+				<div class="row">
+					<div class="col-xs-6">
+					
+						<p><strong>Imie: </strong><span th:text="${user.firstName}"></span></p>
+					
+						<p><strong>Nazwisko: </strong><span th:text="${user.lastName}"></span></p>
+					
+					</div>
+					<div class="col-xs-6">
+						<p><strong>email: </strong><span th:text="${user.email}"></span></p>
+						
+						<p><strong>Aktywny: </strong><span th:text="${user.enabled}"></span></p>
+						
+					</div>
+				</div>
+				
+				
+			</div>
+			
+		</div>
+	</div>
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

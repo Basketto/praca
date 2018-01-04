@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/order/orderUpdate}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						Edycja statusu<span style="font-size: small"></span>
+					</legend>
+					
+					<input hidden="hidden" name="id" th:value="${order.id}" />
+
+
+				
+
+					
+
+			
+
+					
+<!-- category -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="orderStatus">*
+							Zmiana zamowienia</label>
+						<div class="col-md-8">
+							<select th:value="${order.orderStatus}" id="orderStatus" name="orderStatus"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Wybierz status</option>
+								<option value="created"
+									th:selected="(${order.orderStatus}=='created')">Utworzono</option>
+								<option value="send"
+									th:selected="(${order.orderStatus}=='send')">Gotowe</option>
+								
+							</select>
+						</div>
+					</div>
+					
+
+					
+					
+
+
+					
+
+				
+
+			
+
+			
+
+				
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Zatwierdz</button>
+							<a class="btn btn-danger" th:href="@{/order/orderInfo(id=${order.id})}">Anuluj</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

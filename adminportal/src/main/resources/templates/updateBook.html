@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/book/updateBook}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						Edycja produktu<span style="font-size: small"> * te pole jest wymagane</span>
+					</legend>
+					
+					<input hidden="hidden" name="id" th:value="${book.id}" />
+
+
+					<!-- title -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="title">* Nazwa</label>
+
+						<div class="col-md-8">
+							<input type="text" name="title" class="form-control" id="title"
+								th:value="${book.title}" required="required" placeholder="Nazwa produktu" />
+							<span class="help-block">Nazwa produktu</span>
+						</div>
+					</div>
+
+					
+
+					
+		<!-- publication date -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="publicationDate">Data wprowadzenia</label>
+						<div class="col-md-8">
+							<input type="date" class="form-control" id="publicationDate"
+								name="publicationDate" th:value="${book.publicationDate}"
+								placeholder="data wprowadzenia" /> <span class="help-block">Data wprowadzenia produktu</span>
+						</div>
+					</div>
+
+					
+<!-- category -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="category">*
+							Kategoria</label>
+						<div class="col-md-8">
+							<select th:value="${book.category}" id="category" name="category"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Wybierz kategorie</option>
+								<option value="Torty"
+									th:selected="(${book.category}=='Torty')">Torty</option>
+								<option value="Torty_Firmowe"
+									th:selected="(${book.category}=='Torty_Firmowe')">Torty Firmowe</option>
+								<option value="Slodkosci"
+									th:selected="(${book.category}=='Slodkosci')">Slodkosci</option>
+								<option value="Ciasta"
+									th:selected="(${book.category}=='Ciasta')">Ciasta</option>
+								<option value="Pieczywo"
+									th:selected="(${book.category}=='Pieczywo')">Pieczywo
+									</option>
+							</select>
+						</div>
+					</div>
+					
+
+					
+					<!-- format -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="format">Smaki</label>
+						<div class="col-md-8">
+							<select th:value="${book.format}" id="format" name="format"
+								class="form-control">
+								<option value="migdalowy">Migdalowy</option>
+								<option value="czekoladowy">Czekoladowy</option>
+								<option value="orzechowy">Orzechowy</option>
+								<option value="brzoskwiniowy">Brzoskwiniowy</option>
+								<option value="Owoce lesne">Owoce lesne</option>
+								<option value="Truskawkowy">Truskawkowy</option>
+							</select>
+						</div>
+					</div>
+
+
+					
+
+					<!-- shipping weight -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="shippingWeight">Waga produktu</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<input th:value="${book.shippingWeight}" type="number" step="0.01"
+									name="shippingWeight" class="form-control" id="shippingWeight"
+									placeholder="Waga produktu" /> <span
+									class="input-group-addon">Kg</span>
+							</div>
+							<span class="help-block">Waga produktu</span>
+						</div>
+					</div>
+
+				<!-- list price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="listPrice">Cena sugerowana</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">zl</span> <input
+									th:value="${book.listPrice}" type="number" name="listPrice" step="0.01"
+									class="form-control" id="listPrice" placeholder="Cena sugerowana" />
+							</div>
+							<span class="help-block">Cena sugerowana produktu</span>
+						</div>
+					</div>
+
+					<!-- our price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="ourPrice">Nasza cena</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">zl</span> <input
+									th:value="${book.ourPrice}" type="number" name="ourPrice" step="0.01"
+									class="form-control" id="ourPrice" placeholder="Nasza cena" />
+							</div>
+							<span class="help-block">Cena naszego produktu</span>
+						</div>
+					</div>
+
+					<!-- in stock number -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="inStockNumber">Aktualna ilosc</label>
+						<div class="col-md-8">
+							<input th:value="${book.inStockNumber}" type="number"
+								name="inStockNumber" class="form-control" id="inStockNumber"
+								placeholder="Aktualna ilosc" /> <span
+								class="help-block">Aktualna ilosc</span>
+						</div>
+					</div>
+
+						<!-- status of book -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Status</label>
+						<div class="col-md-8">
+							<label><input value="true" type="radio" name="active"
+								checked="checked" /> Dostepny </label> <label><input
+								value="false" type="radio" name="active" />
+								Niedostepny </label> <span class="help-block">Czy produkt jest aktulanie dostepny</span>
+						</div>
+					</div>
+
+					<!-- description -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="description">Opis produktu</label>
+						<div class="col-md-8">
+							<textarea name="description" rows="5" class="form-control"
+								id="description" th:value="${book.description}"
+								placeholder="Opis produktu" />
+							<span class="help-block">Opis produktu</span>
+						</div>
+					</div>
+
+					<!-- upload image -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="bookImage">Dodaj obraz produktu</label>
+						</div>
+						<div class="col-md-8">
+							<input id="bookImage" type="file" name="bookImage"
+								th:value="${book.bookImage}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Zatwierdz</button>
+							<a class="btn btn-danger" th:href="@{/book/bookInfo(id=${book.id})}">Anuluj</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>
